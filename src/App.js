@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import MiniDrawer from './components/dashboardNavigation';
-import MediaCard from './components/mainProducts';
+import ProductBody from './components/mainProducts';
 import PrimarySearchAppBar from './components/topNavigation';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <PrimarySearchAppBar/>
       {/* <MiniDrawer /> */}
-      <MediaCard/>
+      <ProductBody/>
   
     </div>
   );

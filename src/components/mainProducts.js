@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -10,8 +10,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import suprimeImage from '../images/suprime.png';
+
+import Skeleton from '@material-ui/lab/Skeleton';
+
+
 import caseImage from '../images/case.png';
+import suprimeImage from '../images/suprime.png';
 import watchImage from '../images/watch.png';
 
 const useStyles = makeStyles({
@@ -22,14 +26,14 @@ const useStyles = makeStyles({
   mediasmall: {
     height: 160,
   },
-  spacingSmall:{
-    
+  spacingSmall: {
+
     paddingTop: 10,
     paddingRight: 5,
     paddingLeft: 5,
     paddingBottom: 10,
   },
-  spacingBig:{
+  spacingBig: {
     paddingTop: 10,
     paddingRight: 5,
     paddingLeft: 5,
@@ -54,192 +58,132 @@ const MyButton = styled(({ color, ...other }) => <Button {...other} />)({
   margin: 8,
 });
 
-export default function MediaCard() {
+
+
+
+
+const data = [
+  {
+    src: caseImage,
+    price: '4.99$',
+    description: 'Lizards are a widespread, raging across all continents',
+  },
+  {
+    src: suprimeImage,
+    price: '24.99$',
+    description: 'Lizards are a widespread, raging across all continents',
+  },
+
+];
+
+const dataR = [
+  {
+    src: watchImage,
+    price: '59.99$',
+    description: 'Lizards are a widespread',
+  },
+  {
+    src: watchImage,
+    price: '59.99$',
+    description: 'Lizards are a widespread',
+  },
+  {
+    src: watchImage,
+    price: '59.99$',
+    description: 'Lizards are a widespread',
+  },
+  {
+    src: watchImage,
+    price: '59.99$',
+    description: 'Lizards are a widespread',
+  },
+  {
+    src: watchImage,
+    price: '59.99$',
+    description: 'Lizards are a widespread',
+  },
+  {
+    src: watchImage,
+    price: '59.99$',
+    description: 'Lizards are a widespread',
+  },
+]
+
+export default function ProductBody() {
+
   const classes = useStyles();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(false);
+    setTimeout(() => {
+      
+    }, 1000)
+  }, []);
+
   return (
     <>
-
       <Box maxWidth="xl" display={{ xs: 'block', md: 'inline-flex' }}>
-
         <Grid container >
-          <Grid item xl={5} lg={5} md={5} className={classes.spacingBig}> 
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image={caseImage}
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    4.99$
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread, ranging
-                    across all continents except Antarctica
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
+          {(loading ? Array.from(new Array(2)) : data).map((item, index) => (
+            <Grid key={index} item xl={5} lg={5} md={5} className={classes.spacingBig}>
+              <Card className={classes.card}>
+                <CardActionArea>
+                  {item ? (
+                    <CardMedia
+                      className={classes.media}
+                      image={item.src}
+                      title={item.price}
+                    />
+                  ) : (<Skeleton  animation="wave" variant="rect" width="100%"height={500} />
+                    )}
+                  {item ? (
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">{item.price}</Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">{item.description}</Typography>
+                    </CardContent>
+                  ) : (<Skeleton animation="wave"  width="80%" height={30} />
+                    )}
+                </CardActionArea>
+                <CardActions>
 
-              <MyButton color="blue">ADD TO CART</MyButton>
-              <MyButton color="red">BUY NOW</MyButton>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item xl={5} lg={5} md={5} className={classes.spacingBig}>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image={suprimeImage}
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    25.44$
-          </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread, ranging
-                    across all continents except Antarctica
-          </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <MyButton color="blue">ADD TO CART</MyButton>
-                <MyButton color="red">BUY NOW</MyButton>
-              </CardActions>
-            </Card>
-          </Grid>
+                  <MyButton color="blue">ADD TO CART</MyButton>
+                  <MyButton color="red">BUY NOW</MyButton>
+                </CardActions>
+              </Card>
+
+            </Grid>
+          ))}
         </Grid>
 
         <Grid container >
-          <Grid item md={4} sm={12} className={classes.spacingSmall}>
-            <Card className={classes.cardsmall}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.mediasmall}
-                  image={watchImage}
-                  title="Contemplative Reptile"
-                />
-                <CardContent >
-                  <Typography gutterBottom variant="h5" component="h2">59.99$</Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread
-          </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-               <MyButton color="blue">ADD TO CART</MyButton>
-                <MyButton color="red">BUY NOW</MyButton>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item md={4} sm={12} className={classes.spacingSmall}>
-            <Card className={classes.cardsmall}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.mediasmall}
-                  image={watchImage}
-                  title="Contemplative Reptile"
-                />
-                <CardContent >
-                  <Typography gutterBottom variant="h5" component="h2">59.99$</Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread
-          </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <MyButton color="blue">ADD TO CART</MyButton>
-                <MyButton color="red">BUY NOW</MyButton>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item md={4} sm={12} className={classes.spacingSmall}>
-            <Card className={classes.cardsmall}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.mediasmall}
-                  image={watchImage}
-                  title="Contemplative Reptile"
-                />
-                <CardContent >
-                  <Typography gutterBottom variant="h5" component="h2">59.99$</Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread
-          </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <MyButton color="blue">ADD TO CART</MyButton>
-                <MyButton color="red">BUY NOW</MyButton>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item md={4} sm={12} className={classes.spacingSmall}>
-            <Card className={classes.cardsmall}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.mediasmall}
-                  image={watchImage}
-                  title="Contemplative Reptile"
-                />
-                <CardContent >
-                  <Typography gutterBottom variant="h5" component="h2">59.99$</Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread
-          </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <MyButton color="blue">ADD TO CART</MyButton>
-                <MyButton color="red">BUY NOW</MyButton>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item md={4} sm={12} className={classes.spacingSmall}>
-            <Card className={classes.cardsmall}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.mediasmall}
-                  image={watchImage}
-                  title="Contemplative Reptile"
-                />
-                <CardContent >
-                  <Typography gutterBottom variant="h5" component="h2">59.99$</Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread
-          </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <MyButton color="blue">ADD TO CART</MyButton>
-                <MyButton color="red">BUY NOW</MyButton>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item md={4} sm={12} className={classes.spacingSmall}>
-            <Card className={classes.cardsmall}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.mediasmall}
-                  image={watchImage}
-                  title="Contemplative Reptile"
-                />
-                <CardContent >
-                  <Typography gutterBottom variant="h5" component="h2">59.99$</Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread
-          </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <MyButton color="blue">ADD TO CART</MyButton>
-                <MyButton color="red">BUY NOW</MyButton>
-              </CardActions>
-            </Card>
-          </Grid>
+          {(loading ? Array.from(new Array(6)) : dataR).map((item, index) => (
+            <Grid item key={index} md={4} sm={12} className={classes.spacingSmall}>
+              <Card className={classes.cardsmall}>
+                <CardActionArea>
+                  {item ? (
+                    <CardMedia
+                      className={classes.mediasmall}
+                      image={item.src}
+                      title={item.price}
+                    />
+                  ) : (<Skeleton animation="wave"   variant="rect" width="100%" height={200} />
+                    )}
+                  {item ? (
+                    <CardContent >
+                      <Typography gutterBottom variant="h5" component="h2">{item.price}</Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">{item.description}</Typography>
+                    </CardContent>
+                  ) : (<Skeleton animation="wave"  width="60%" />
+                    )}
+                </CardActionArea>
+                <CardActions>
+                  <MyButton color="blue">ADD TO CART</MyButton>
+                  <MyButton color="red">BUY NOW</MyButton>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
         </Grid>
       </Box>
 
