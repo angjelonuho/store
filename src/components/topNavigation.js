@@ -4,19 +4,19 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import MailRoundedIcon from '@material-ui/icons/MailRounded';
+
+import NotificationsSharpIcon from '@material-ui/icons/NotificationsSharp';
+
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-
+import history from '../history';
 
 const theme = createMuiTheme({
     palette: {
@@ -143,9 +143,17 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
+        <IconButton aria-label="show 4 new mails" color="inherit" onClick={() => history.push('/Cart')}>
+          <Badge badgeContent={4} color="secondary" >
+            <ShoppingCartOutlinedIcon  />
+          </Badge >
+        </IconButton>
+        <p>Shopping Cart</p>
+      </MenuItem>
+      <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
-            <MailIcon />
+            <MailRoundedIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
@@ -153,7 +161,7 @@ export default function PrimarySearchAppBar() {
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
+            <NotificationsSharpIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
@@ -165,7 +173,7 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <AccountCircleOutlinedIcon />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -177,27 +185,24 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="static" color="primary">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Material-UI
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+          <IconButton aria-label="show 4 new mails" color="inherit" onClick={() => history.push('/Cart')}>
+              <Badge badgeContent={2} color="secondary">
+                <ShoppingCartOutlinedIcon  />
+              </Badge>
+            </IconButton>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
-                <MailIcon />
+                <MailRoundedIcon />
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
+                <NotificationsSharpIcon />
               </Badge>
             </IconButton>
             <IconButton
@@ -208,7 +213,7 @@ export default function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircleOutlinedIcon />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>

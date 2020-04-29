@@ -1,16 +1,14 @@
 import React from 'react';
 import './App.css';
-import MiniDrawer from './components/dashboardNavigation';
-import ProductBody from './components/mainProducts';
 import PrimarySearchAppBar from './components/topNavigation';
+
+import Routes from './Routes';
 
 function App() {
   return (
     <div className="App">
       <PrimarySearchAppBar/>
-      {/* <MiniDrawer /> */}
-      <ProductBody/>
-  
+      <Routes /> 
     </div>
   );
 }

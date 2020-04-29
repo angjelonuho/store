@@ -18,6 +18,8 @@ import caseImage from '../images/case.png';
 import suprimeImage from '../images/suprime.png';
 import watchImage from '../images/watch.png';
 
+import CountdownTimer from './countdown';
+
 const useStyles = makeStyles({
 
   media: {
@@ -186,6 +188,8 @@ export default function ProductBody() {
           ))}
         </Grid>
       </Box>
+
+      <CountdownTimer/>
 
     </>
   );
