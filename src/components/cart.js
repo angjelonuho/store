@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     fontWeight: '600',
     letterSpacing: '0',
     lineHeight: '36px',
-    marginBottom: '24px',
+    marginBottom: '60px',
     marginTop: '200px',
     textAlign: 'center',
   },
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     backgroundImage: `url(${cart})`,
     backgroundSize: 'cover',
     height: '400px',
-    margin: '72px auto',
+    margin: '30px auto',
     textAlign: 'center',
     width: '703px',
 }
