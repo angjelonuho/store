@@ -13,12 +13,15 @@ import Box from '@material-ui/core/Box';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 
-
 import caseImage from '../images/case.png';
 import suprimeImage from '../images/suprime.png';
 import watchImage from '../images/watch.png';
 
 import CountdownTimer from './countdown';
+
+import { connect } from 'react-redux';
+import { addToCart } from '../actions/addAction';
+
 
 const useStyles = makeStyles({
 
@@ -59,10 +62,6 @@ const MyButton = styled(({ color, ...other }) => <Button {...other} />)({
   padding: '0 30px',
   margin: 8,
 });
-
-
-
-
 
 const data = [
   {
@@ -111,7 +110,9 @@ const dataR = [
   },
 ]
 
-export default function ProductBody() {
+
+
+function ProductBody(props) {
 
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
@@ -122,7 +123,7 @@ export default function ProductBody() {
       
     }, 1000)
   }, []);
-
+  
   return (
     <>
       <Box maxWidth="xl" display={{ xs: 'block', md: 'inline-flex' }}>
@@ -149,7 +150,7 @@ export default function ProductBody() {
                 </CardActionArea>
                 <CardActions>
 
-                  <MyButton color="blue">ADD TO CART</MyButton>
+                  <MyButton color="blue" onClick={() => props.addToCart('left'+index)} >ADD TO CART</MyButton>
                   <MyButton color="red">BUY NOW</MyButton>
                 </CardActions>
               </Card>
@@ -180,7 +181,7 @@ export default function ProductBody() {
                     )}
                 </CardActionArea>
                 <CardActions>
-                  <MyButton color="blue">ADD TO CART</MyButton>
+                  <MyButton color="blue" onClick={() => props.addToCart('right'+index)} >ADD TO CART</MyButton>
                   <MyButton color="red">BUY NOW</MyButton>
                 </CardActions>
               </Card>
@@ -194,3 +195,5 @@ export default function ProductBody() {
     </>
   );
 }
+
+export default connect(null,{addToCart}) (ProductBody);

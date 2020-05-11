@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,6 +17,9 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import history from '../history';
+
+import { connect } from 'react-redux';
+import { getNumbers } from '../actions/getAction';
 
 const theme = createMuiTheme({
     palette: {
@@ -90,7 +93,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+function PrimarySearchAppBar(props) {
+
+  useEffect(()=>{
+    getNumbers();
+  }, [])
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -191,7 +199,7 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
           <IconButton aria-label="show 4 new mails" color="inherit" onClick={() => history.push('/Cart')}>
-              <Badge badgeContent={2} color="secondary">
+              <Badge badgeContent={props.cartProps.cartNumbers} color="secondary">
                 <ShoppingCartOutlinedIcon  />
               </Badge>
             </IconButton>
@@ -235,3 +243,8 @@ export default function PrimarySearchAppBar() {
     </ThemeProvider>
   );
 }
+
+const mapStateToProps = state => ({
+  cartProps: state.shoppingCartState
+})
+export default connect(mapStateToProps,{getNumbers}) (PrimarySearchAppBar);
