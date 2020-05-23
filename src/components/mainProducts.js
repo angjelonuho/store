@@ -22,7 +22,6 @@ import CountdownTimer from './countdown';
 import { connect } from 'react-redux';
 import { addToCart } from '../actions/addAction';
 
-
 const useStyles = makeStyles({
 
   media: {
@@ -43,7 +42,7 @@ const useStyles = makeStyles({
     paddingRight: 5,
     paddingLeft: 5,
     paddingBottom: 10,
-  }
+  },
 });
 
 const MyButton = styled(({ color, ...other }) => <Button {...other} />)({
@@ -110,8 +109,6 @@ const dataR = [
   },
 ]
 
-
-
 function ProductBody(props) {
 
   const classes = useStyles();
@@ -120,12 +117,15 @@ function ProductBody(props) {
   useEffect(() => {
     setLoading(false);
     setTimeout(() => {
-      
+
     }, 1000)
   }, []);
-  
+
+
+ 
   return (
     <>
+
       <Box maxWidth="xl" display={{ xs: 'block', md: 'inline-flex' }}>
         <Grid container >
           {(loading ? Array.from(new Array(2)) : data).map((item, index) => (
@@ -138,19 +138,19 @@ function ProductBody(props) {
                       image={item.src}
                       title={item.price}
                     />
-                  ) : (<Skeleton  animation="wave" variant="rect" width="100%"height={500} />
+                  ) : (<Skeleton animation="wave" variant="rect" width="100%" height={500} />
                     )}
                   {item ? (
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="h2">{item.price}</Typography>
                       <Typography variant="body2" color="textSecondary" component="p">{item.description}</Typography>
                     </CardContent>
-                  ) : (<Skeleton animation="wave"  width="80%" height={30} />
+                  ) : (<Skeleton animation="wave" width="80%" height={30} />
                     )}
                 </CardActionArea>
                 <CardActions>
 
-                  <MyButton color="blue" onClick={() => props.addToCart('left'+index)} >ADD TO CART</MyButton>
+                  <MyButton color="blue" onClick={() => props.addToCart('left' + index)} >ADD TO CART</MyButton>
                   <MyButton color="red">BUY NOW</MyButton>
                 </CardActions>
               </Card>
@@ -170,18 +170,18 @@ function ProductBody(props) {
                       image={item.src}
                       title={item.price}
                     />
-                  ) : (<Skeleton animation="wave"   variant="rect" width="100%" height={200} />
+                  ) : (<Skeleton animation="wave" variant="rect" width="100%" height={200} />
                     )}
                   {item ? (
                     <CardContent >
                       <Typography gutterBottom variant="h5" component="h2">{item.price}</Typography>
                       <Typography variant="body2" color="textSecondary" component="p">{item.description}</Typography>
                     </CardContent>
-                  ) : (<Skeleton animation="wave"  width="60%" />
+                  ) : (<Skeleton animation="wave" width="60%" />
                     )}
                 </CardActionArea>
                 <CardActions>
-                  <MyButton color="blue" onClick={() => props.addToCart('right'+index)} >ADD TO CART</MyButton>
+                  <MyButton color="blue" onClick={() => props.addToCart('right' + index)} >ADD TO CART</MyButton>
                   <MyButton color="red">BUY NOW</MyButton>
                 </CardActions>
               </Card>
@@ -190,10 +190,10 @@ function ProductBody(props) {
         </Grid>
       </Box>
 
-      <CountdownTimer/>
+      <CountdownTimer />
 
     </>
   );
 }
 
-export default connect(null,{addToCart}) (ProductBody);
+export default connect(null, { addToCart })(ProductBody);

@@ -6,21 +6,38 @@ import Button from '@material-ui/core/Button';
 import cart from '../images/empty_cart.jpg'
 import history from '../history';
 import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import '../css/cart.css';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import {productQuantity} from '../actions/productQuantity';
 
-const useStyles = makeStyles({
+
+const useStyles = makeStyles((theme) => ({
   containerBlue: {
     backgroundColor: '#fff',
   },
   yourcartisempty: {
     color: '#423f3f',
     fontFamily: '"Google Sans",Arial,sans-serif',
-    fontSize: '43px',
+    fontSize: '50px',
     fontWeight: '600',
     letterSpacing: '0',
     lineHeight: '36px',
     marginBottom: '60px',
-    marginTop: '200px',
+    marginTop: '130px',
     textAlign: 'center',
+  },
+  emptyButton: {
+    fontSize: '1.2rem',
+    backgroundColor: '#e6e6e6',
+    fontFamily: 'cursive',
+    fontWeight: '600',
   },
   emptycartlogo: {
     backgroundImage: `url(${cart})`,
@@ -29,11 +46,38 @@ const useStyles = makeStyles({
     margin: '30px auto',
     textAlign: 'center',
     width: '703px',
-  }
+  },
+  root: {
+    flexGrow: 1,
+    marginTop: '20px'
+  },
+  paper: {
+    padding: theme.spacing(2),
+    margin: 'auto',
+    maxWidth: 600,
 
-});
+  },
+  image: {
+    width: 150,
+    height: 150,
+  },
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 50,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 
-function ShoppingCart({ cartProps }) {
+}));
+
+function ShoppingCart({ cartProps, productQuantity }) {
 
   const classes = useStyles();
 
@@ -49,9 +93,58 @@ function ShoppingCart({ cartProps }) {
   })
 
   productsInCart = productsInCart.map((product, index) => {
+
     return (
       <div key={index}>
-        <p>{product.description}</p>
+        <div className={classes.root}>
+
+          <Paper className={classes.paper} elevation={3}>
+            <Grid container spacing={2} justify="center" >
+              <Grid item>
+                <ButtonBase className={classes.image}>
+                  <img className={classes.img} alt="complex" src={product.src} />
+                </ButtonBase>
+              </Grid>
+              <Grid item xs={12} md container>
+                <Grid item xs container direction="column" spacing={2}>
+                  <Grid item xs>
+                    <Typography gutterBottom variant="subtitle1">
+                      Tittle
+                </Typography>
+                    <Typography gutterBottom variant="body2" >
+                      {product.description}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="body2" className='removeButton' style={{ cursor: 'pointer' }}>
+                      Remove
+                </Typography>
+                  </Grid>
+                </Grid>
+                <Grid item>
+                  <Typography>${(product.numbers * product.price).toFixed(2) }</Typography>
+                  <FormControl className={classes.formControl}>
+                    <Select
+                      value={product.numbers}
+                      onChange={ (event) => productQuantity(event.target.value, product.tagName)}
+                      displayEmpty
+                      className={classes.selectEmpty}
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem value={1}>1</MenuItem>
+                      <MenuItem value={2}>2</MenuItem>
+                      <MenuItem value={3}>3</MenuItem>
+                      <MenuItem value={4}>4</MenuItem>
+                      <MenuItem value={5}>5</MenuItem>
+                    </Select>
+                    <FormHelperText>Quantity</FormHelperText>
+                  </FormControl>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Paper>
+
+        </div>
 
       </div>
     )
@@ -62,7 +155,7 @@ function ShoppingCart({ cartProps }) {
         <CssBaseline />
         <Container maxWidth="xl" className={classes.containerBlue}>
           <div className={classes.yourcartisempty}>Your cart is empty</div>
-          <Button variant="outlined" onClick={() => history.push('/')}>Continue shopping</Button>
+          <Button variant="outlined" className={classes.emptyButton} onClick={() => history.push('/')}>Continue shopping</Button>
           <div className={classes.emptycartlogo}></div>
         </Container>
       </React.Fragment>
@@ -70,7 +163,16 @@ function ShoppingCart({ cartProps }) {
   } else {
     return (
       <>
-        {productsInCart}
+        <Button className='backButton' onClick={() => history.push('/')} size="large" variant="outlined">Back</Button>
+        <Grid container  >
+          <Grid item xs={12} md={8}>
+            {productsInCart}
+          </Grid>
+          <Grid item className={classes.root}  xs={12}  md={3} >
+              <Paper className={classes.paper}>total: {(cartProps.cartCost).toFixed(2)}</Paper>
+          </Grid>
+        </Grid> 
+
       </>
     )
   }
@@ -80,4 +182,4 @@ const mapStateToProps = state => ({
   cartProps: state.shoppingCartState
 });
 
-export default connect(mapStateToProps)(ShoppingCart);
+export default connect(mapStateToProps, {productQuantity})(ShoppingCart);
