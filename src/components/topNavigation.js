@@ -194,7 +194,7 @@ function PrimarySearchAppBar(props) {
       <AppBar position="static" color="primary">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+             Mini E-Comerce
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
