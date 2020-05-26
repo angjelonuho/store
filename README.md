@@ -21,4 +21,4 @@ A step by step series of examples that tell you how to get a development env run
 * Material-UI
 
 ## Authors
-* Angjelo Nuho
+* *Angjelo Nuho*
