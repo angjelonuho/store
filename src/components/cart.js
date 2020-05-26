@@ -16,7 +16,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import {productQuantity} from '../actions/productQuantity';
-
+import {removeProduct} from '../actions/removeAction';
+import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   containerBlue: {
@@ -77,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function ShoppingCart({ cartProps, productQuantity }) {
+function ShoppingCart({ cartProps, productQuantity, removeProduct}) {
 
   const classes = useStyles();
 
@@ -96,7 +98,7 @@ function ShoppingCart({ cartProps, productQuantity }) {
 
     return (
       <div key={index}>
-        <div className={classes.root}>
+        <Box maxWidth="xl" className={classes.root}>
 
           <Paper className={classes.paper} elevation={3}>
             <Grid container spacing={2} justify="center" >
@@ -117,8 +119,8 @@ function ShoppingCart({ cartProps, productQuantity }) {
                   </Grid>
                   <Grid item>
                     <Typography variant="body2" className='removeButton' style={{ cursor: 'pointer' }}>
-                      Remove
-                </Typography>
+                      <Link className='removeButton' onClick={() => removeProduct(product.tagName)} >Remove</Link>
+                    </Typography>  
                   </Grid>
                 </Grid>
                 <Grid item>
@@ -144,7 +146,7 @@ function ShoppingCart({ cartProps, productQuantity }) {
             </Grid>
           </Paper>
 
-        </div>
+        </Box>
 
       </div>
     )
@@ -182,4 +184,4 @@ const mapStateToProps = state => ({
   cartProps: state.shoppingCartState
 });
 
-export default connect(mapStateToProps, {productQuantity})(ShoppingCart);
+export default connect(mapStateToProps, {productQuantity , removeProduct})(ShoppingCart);

@@ -43,6 +43,7 @@ const useStyles = makeStyles({
     paddingLeft: 5,
     paddingBottom: 10,
   },
+
 });
 
 const MyButton = styled(({ color, ...other }) => <Button {...other} />)({
@@ -129,8 +130,8 @@ function ProductBody(props) {
       <Box maxWidth="xl" display={{ xs: 'block', md: 'inline-flex' }}>
         <Grid container >
           {(loading ? Array.from(new Array(2)) : data).map((item, index) => (
-            <Grid key={index} item xl={5} lg={5} md={5} className={classes.spacingBig}>
-              <Card className={classes.card}>
+            <Grid key={index} item  md={5} sm={6} className={classes.spacingBig}>
+              <Card >
                 <CardActionArea>
                   {item ? (
                     <CardMedia
@@ -161,8 +162,8 @@ function ProductBody(props) {
 
         <Grid container >
           {(loading ? Array.from(new Array(6)) : dataR).map((item, index) => (
-            <Grid item key={index} md={4} sm={12} className={classes.spacingSmall}>
-              <Card className={classes.cardsmall}>
+            <Grid item key={index} md={4} sm={6} xs={12} className={classes.spacingSmall}>
+              <Card>
                 <CardActionArea>
                   {item ? (
                     <CardMedia

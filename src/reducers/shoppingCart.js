@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_BASKET, GET_NUMBERS_CART, QUANTITY } from '../actions/types';
+import { ADD_PRODUCT_BASKET, GET_NUMBERS_CART, QUANTITY, REMOVE_PRODUCT_BASKET } from '../actions/types';
 import caseImage from '../images/case.png';
 import suprimeImage from '../images/suprime.png';
 import watchImage from '../images/watch.png';
@@ -79,7 +79,7 @@ export default (state = initialState, action) => {
     let productSelected = '';
     switch(action.type){
         case ADD_PRODUCT_BASKET:
-            productSelected = {...state.products[action.payload]}
+            productSelected = {...state.products[action.payload]};
             productSelected.numbers += 1;
             productSelected.inCart = true;
 
@@ -99,18 +99,36 @@ export default (state = initialState, action) => {
             }
         case QUANTITY:
             productSelected = {...state.products[action.payload]};
+            let totalBefore = state.cartCost -  productSelected.numbers * state.products[action.payload].price;
             productSelected.numbers =  action.qua;
-
-            let oldPrice = productSelected.numbers * state.products[action.payload].price  - state.cartCost;
+            let totalAfter = (productSelected.numbers* state.products[action.payload].price);
 
             return{
                 ...state,
-                cartCost: oldPrice + productSelected.numbers * state.products[action.payload].price,
+                cartCost:totalBefore + totalAfter,
                 products:{
                     ...state.products,
                     [action.payload]: productSelected
                 }
-        }        
+        }
+        case REMOVE_PRODUCT_BASKET: 
+            productSelected = {...state.products[action.payload]};
+            let numbersBackup = productSelected.numbers;
+            productSelected.numbers = 0;
+            productSelected.inCart = false;
+
+            console.log(productSelected)
+
+            return{
+
+                ...state,
+                cartCost: state.cartCost - (numbersBackup * productSelected.price),
+                products: {
+                    ...state.products,
+                    [action.payload]: productSelected,
+                }
+
+            }
         
         default:
             return state;

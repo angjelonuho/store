@@ -19,7 +19,10 @@
 .MuiSelect-select:focus{
   background-color: #fff !important;
 }
-
+.removeButton{
+  color: rgba(0, 0, 0, 0.87) !important; 
+}
 .removeButton:hover{
-  color: red;
+  color: red !important;
+  text-decoration: none !important;
 }
