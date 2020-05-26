@@ -4,8 +4,8 @@ This is a small e-comerce project selling exact eight product a week.
 
 ## Snapshots
 <details>
-![alt text](/readmeImg/home.png)
  <summary>Homne/Products</summary>
+ <img src="/readmeImg/home.png"  />
 </details>
 
 ## Getting Started
