@@ -1,2 +1,2 @@
-# store
- this is a store
+# Mini E-Comerce 
+This is a small e-comerce project 
