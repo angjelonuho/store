@@ -21,14 +21,15 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 What things you need to install the software and how to install them
 
-`Download and Install Latest Node.js version`
+`Download and Install Latest Node.js version`  
 `Download and Install XAMPP and Include Apache and MySQL Mudules`
 
 ### Installing
 A step by step series of examples that tell you how to get a development env running
 
-After Downloading the Prerequisites
-Fetch the repository
+`After Downloading the Prerequisites`  
+`Fetch the repository`  
+
 * Go to \Short_Url_Service\client\short_url
   * Open a Terminal
   * Type: npm run serve
