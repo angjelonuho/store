@@ -21,19 +21,26 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 What things you need to install the software and how to install them
 
-`Insall ReactJS - Environment`
+`Download and Install Latest Node.js version`
+`Download and Install XAMPP and Include Apache and MySQL Mudules`
+
 ### Installing
 A step by step series of examples that tell you how to get a development env running
 
+`After Downloading the Prerequisites`
+`Fetch the repository`
+1.`Go to \Short_Url_Service\client\short_url`
+  -`Open a Terminal`
+  -`Type: npm run serve`
+  
 `npm install`
-
 `npm start`
 
 ## Built With
 
-* Reactjs
-* Redux
-* Material-UI
+* Vue.js
+* Node.js
+* MySQL
 
 ## Authors
 * *Angjelo Nuho*
