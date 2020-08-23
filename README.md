@@ -29,9 +29,9 @@ A step by step series of examples that tell you how to get a development env run
 
 After Downloading the Prerequisites
 Fetch the repository
-1.Go to \Short_Url_Service\client\short_url
-  -Open a Terminal
-  -Type: npm run serve
+*Go to \Short_Url_Service\client\short_url
+  *Open a Terminal
+  *Type: npm run serve
   
 `npm install`
 `npm start`
