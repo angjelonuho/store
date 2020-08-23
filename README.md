@@ -36,6 +36,11 @@ To setup the database
   * `Go to Mysql Admin`
   * `Create a Database with the name: urls`  
   
+Setup connection
+* `Go to \Short_Url_Service\server\settings.json`
+  * `These are the connectin settings leave everything as it is`
+  
+  
 To run the client
 * `Go to \Short_Url_Service\client\short_url`
   * `Open a Terminal`
