@@ -28,15 +28,27 @@ What things you need to install the software and how to install them
 A step by step series of examples that tell you how to get a development env running
 
 `After Downloading the Prerequisites`  
-`Fetch the repository`  
+`Fetch the repository`   
 
+To setup the database
+* `Open XAMPP`
+  * `Start Apache and Mysql`
+  * `Go to Mysql Admin`
+  * `Create a Database with the name: urls`  
+  
+To run the client
 * `Go to \Short_Url_Service\client\short_url`
   * `Open a Terminal`
+  * `Type: npm install`
   * `Type: npm run serve`
-  
-`npm install`
-`npm start`
 
+To run the server
+* `Go to \Short_Url_Service\server`
+  * `Open a Terminal`
+  * `Type: npm install`
+  * `Type: npm start`  
+
+  
 ## Built With
 
 * Vue.js
